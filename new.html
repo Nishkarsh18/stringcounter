@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <title>
+      string_counter	
+	</title>
+	<link rel="stylesheet" type="text/css" href="nish.css"/>
+   </head>
+   <body> 
+<fieldset> 
+<legend><h1>STRING COUNTER</h1></legend>
+<form name="form">
+<textarea name="comments" cols="50" rows="5" id="helo" placeholder="ENTER A STRING">
+</textarea>
+</fieldset>
+<p><h2>PLEASE ENTER THE CHOICES IN STRING YOU WANT COUNT(YOU CAN HAVE MORE THAN ONE CHOICE ALSO)</h2></p>
+<h3>
+Vowels
+<input type="checkbox" name="Vowels" id="v"/>
+Spaces
+<input type="checkbox" name="Spaces" id="sp"/>
+Consonants
+<input type="checkbox" name="Consonants" id="c"/>
+Special
+<input type="checkbox" name="Special" id="s"/>
+All Of The Above
+<input type="checkbox" name="AllOfTheAbove"/></h3>
+<input type="button" value="SUBMIT" onclick=main() id="hell"/>
+</form>
+<div id="myProgress">
+  <div id="myBar">0%</div>
+</div>
+<p id="vow">
+</p>
+<p id="con">
+</p>
+<p id="spa">
+</p>
+<p id="spe">
+</p>
+<script type="text/javascript">
+function vowels(str1)
+{
+  var vowel_list ="aeiouAEIOU";
+  var vcount = 0;
+  for(var x = 0; x < str1.length ; x++)
+  {
+    if (vowel_list.indexOf(str1[x])!== -1)
+    {
+      vcount+=1;
+    }
+  
+  }
+  return vcount;
+}
+function consonants(str1)
+{
+var consonants_list="bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
+var ccount=0;
+for(var x=0; x<str1.length;x++)
+  {
+    if (consonants_list.indexOf(str1[x])!== -1)
+    {
+      ccount += 1;
+    }
+  
+  }
+  return ccount;
+}
+function spaces(str1)
+{
+var count = str1.match(/([\s]+)/g).length;
+return count;
+}
+function special(str1)
+{
+var ocount;
+ocount=str1.length-(vowels(str1)+consonants(str1)+spaces(str1));
+return ocount;
+}
+function main()
+{
+  var elem = document.getElementById("myBar"); 
+  var width = 5;
+  var id = setInterval(frame,50);
+  function frame() {
+    if (width >= 100) {
+	  clearInterval(id);
+	  elem.innerHTML ='SCROLL DOWN 👇';
+	  var x=document.getElementById("helo").value;
+	  if(x=='')
+	  {
+	  alert("Fill something in text area");
+	  }
+if(document.form.AllOfTheAbove.checked)
+{
+var x1=vowels(x);
+var x2=consonants(x);
+var x3=spaces(x);
+var x4=special(x);
+document.getElementById("vow").innerHTML ="Vowels: "+x1;
+document.getElementById("con").innerHTML ="Consonants: "+x2;
+document.getElementById("spa").innerHTML ="Spaces: "+x3;
+document.getElementById("spe").innerHTML ="Special: "+x4;
+}
+else
+{
+if(document.form.Vowels.checked)
+{
+var x1=vowels(x);
+document.getElementById("vow").innerHTML ="Vowels: "+x1;
+}
+else
+{
+document.getElementById("vow").innerHTML ='';
+}
+if(document.form.Consonants.checked)
+{
+var x1=consonants(x);
+document.getElementById("con").innerHTML ="Consonants: "+x1;
+}
+else
+{
+document.getElementById("con").innerHTML ='';
+}
+if(document.form.Spaces.checked)
+{
+var x1=spaces(x);
+document.getElementById("spa").innerHTML ="Spaces: "+x1;
+}
+else
+{
+document.getElementById("spa").innerHTML ='';
+}
+if(document.form.Special.checked)
+{
+var x1=special(x);
+document.getElementById("spe").innerHTML ="Special: "+x1;
+}
+else
+{
+document.getElementById("spe").innerHTML ='';
+}
+}
+if(document.form.Special.checked==false&&document.form.Spaces.checked==false&&document.form.Consonants.checked==false&&document.form.Vowels.checked==false&&document.form.AllOfTheAbove.checked==false)
+{
+alert("Give atleast one choice");
+}
+    } else {
+	  width+=5; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1 + '%';
+    }
+  } 
+}
+</script>
+</body>
+</html>
