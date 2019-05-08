@@ -69,7 +69,8 @@ for(var x=0; x<str1.length;x++)
 }
 function spaces(str1)
 {
-var count = str1.match(/([\s]+)/g).length;
+var count = 0;
+count = (str1.split(" ").length - 1);
 return count;
 }
 function special(str1)
